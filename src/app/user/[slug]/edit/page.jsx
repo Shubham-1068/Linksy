@@ -28,7 +28,7 @@ function EditPage() {
 
   async function getUsers() {
     try {
-      const response = await fetch("http://localhost:3000/api/links", {
+      const response = await fetch("/api/links", {
         method: "GET",
       });
       const users = await response.json();
@@ -42,7 +42,7 @@ function EditPage() {
     if (!session?.user?.email) return;
 
     try {
-      const response = await fetch("http://localhost:3000/api/links", {
+      const response = await fetch("/api/links", {
         method: "GET",
       });
       const users = await response.json();
@@ -68,7 +68,7 @@ function EditPage() {
     if (!session?.user?.email) return;
 
     try {
-      const response = await fetch("http://localhost:3000/api/links", {
+      const response = await fetch("/api/links", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -92,7 +92,7 @@ function EditPage() {
     if (!session?.user?.email) return;
 
     try {
-      const response = await fetch("http://localhost:3000/api/links", {
+      const response = await fetch("/api/links", {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -114,7 +114,7 @@ function EditPage() {
     if (!session?.user?.email) return;
 
     try {
-      const response = await fetch("http://localhost:3000/api/links", {
+      const response = await fetch("/api/links", {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

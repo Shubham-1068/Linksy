@@ -24,7 +24,7 @@ function SharePageContent() {
   async function getUser(user) {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/user?user=${user}`,
+        `/api/user?user=${user}`,
         { method: "GET" }
       );
       const userData = await response.json();
