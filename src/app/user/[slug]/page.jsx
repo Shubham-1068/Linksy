@@ -9,9 +9,6 @@ import {
   Github,
   Link as LinkIcon,
   LogOut,
-  Edit2,
-  Trash,
-  ArrowDownRight,
   ArrowUpRight,
 } from "lucide-react";
 
@@ -19,37 +16,32 @@ function UserPage({ params }) {
   const session = useSession();
   const router = useRouter();
 
+  const [links, setLinks] = useState([]);
+  const [loading, setLoading] = useState(true); // Loading state to show spinner
+
   useEffect(() => {
     if (session.status === "unauthenticated") {
       router.push("/login");
     }
   }, [session.status, router]);
 
-  async function getDynamicParams() {
-    const { slug } = await params;
-  }
-
-  getDynamicParams();
-
   async function getUser(user) {
     try {
       const response = await fetch(`/api/user?user=${user}`, { method: "GET" });
       const userData = await response.json();
       setLinks(userData.urls || []);
+      setLoading(false); // Set loading to false after data is fetched
     } catch (error) {
       console.error("Error fetching users:", error);
+      setLoading(false); // Set loading to false in case of error
     }
   }
-
-  const [links, setLinks] = useState([]);
 
   useEffect(() => {
     if (session.status === "authenticated") {
       getUser(session.data.user.email);
-      console.log(session.data.user.email);
     }
   }, [session.status]);
-  console.log(links);
 
   return (
     <div className="min-h-screen bg-black text-white">
@@ -85,6 +77,7 @@ function UserPage({ params }) {
                       width={100}
                       height={100}
                       className="rounded-full ring-2 ring-purple-400/20"
+                      priority
                     />
                     <div className="absolute -bottom-2 -right-2 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full p-1.5">
                       <Github className="h-4 w-4 text-white" />
@@ -123,28 +116,38 @@ function UserPage({ params }) {
                   </Link>
                 </div>
 
-                {links &&
-                  links.map((link) => (
-                    <div
-                      key={Math.random()}
-                      className="flex items-center justify-between mb-6"
-                    >
-                      <div className="flex items-center space-x-4">
-                        <div className="p-2 rounded-lg bg-white/5 border border-white/10">
-                          <ArrowUpRight className="h-4 w-4" />
-                        </div>
-                        <div className="space-y-1">{link}</div>
-                      </div>
-                    </div>
-                  ))}
+                {loading ? (
+                  <div className="flex justify-center items-center py-8">
+                    {/* Loader Spinner */}
+                    <div className="w-12 h-12 border-4 border-t-4 border-white/50 border-solid rounded-full animate-spin"></div>
+                  </div>
+                ) : (
+                  <div className="overflow-x-auto">
+                    <div className="flex flex-col gap-1">
+                      {links &&
+                        links.map((link) => (
+                          <div
+                            key={Math.random()}
+                            className="flex items-center justify-between w-full sm:w-auto mb-6"
+                          >
+                            <div className="flex items-center space-x-4">
+                              <div className="p-2 rounded-lg bg-white/5 border border-white/10">
+                                <ArrowUpRight className="h-4 w-4" />
+                              </div>
+                              <div className="space-y-1 text-wrap">{link}</div>
+                            </div>
+                          </div>
+                        ))}
 
-                {links.length === 0 && (
-                  <div className="text-center py-8">
-                    <LinkIcon className="h-12 w-12 text-white/10 mx-auto mb-4" />
-                    <p className="text-white/50 text-sm">
-                      You haven't added any links yet. Click "Add New Link" to
-                      get started!
-                    </p>
+                      {links.length === 0 && (
+                        <div className="text-center py-8">
+                          <LinkIcon className="h-12 w-12 text-white/10 mx-auto mb-4" />
+                          <p className="text-white/50 text-sm">
+                            You haven't added any links yet. Click "Add New Link" to get started!
+                          </p>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 )}
               </div>
