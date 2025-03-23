@@ -43,7 +43,7 @@ export default function HomePage() {
 
             <div className="flex flex-col sm:flex-row justify-center gap-3 pt-4">
               <button onClick={() => router.push("/login")} className="px-6 py-3 rounded-xl bg-gradient-to-r from-purple-500 to-blue-500 text-white text-sm font-medium hover:opacity-90 transition-opacity">
-                Create Your Linksy Profile
+                Get Started !
               </button>
             </div>
           </div>
