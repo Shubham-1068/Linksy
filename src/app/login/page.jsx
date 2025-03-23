@@ -20,7 +20,7 @@ function SignInPage() {
 
       <div className="relative pt-32 pb-16 md:pt-0 md:pb-0 px-4">
         {/* Gradient Background */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none h-screen">
+        <div className="fixed inset-0 overflow-hidden pointer-events-none h-screen">
           <div className="absolute -top-1/4 -right-1/4 w-1/2 h-1/2 bg-purple-500/20 rounded-full blur-[120px]" />
           <div className="absolute -bottom-1/4 -left-1/4 w-1/2 h-1/2 bg-blue-500/20 rounded-full blur-[120px]" />
         </div>

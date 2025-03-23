@@ -103,11 +103,22 @@ function EditPage() {
     }
   }
 
+  if (!Users) {
+    return (
+      <div className="min-h-screen bg-[#0A0A0A] flex items-center justify-center">
+        <div className="flex flex-col items-center">
+          <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-white mb-4"></div>
+          <p className="text-white/70 text-lg">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-[#0A0A0A] text-white">
       <div className="relative pt-16 pb-8 px-4 sm:px-6 lg:px-8">
         {/* Gradient Background */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none h-screen">
+        <div className="fixed inset-0 overflow-hidden pointer-events-none h-screen">
           <div className="absolute -top-1/4 -right-1/4 w-1/2 h-1/2 bg-purple-500/20 rounded-full blur-[120px]" />
           <div className="absolute -bottom-1/4 -left-1/4 w-1/2 h-1/2 bg-blue-500/20 rounded-full blur-[120px]" />
         </div>

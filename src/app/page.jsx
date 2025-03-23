@@ -16,7 +16,7 @@ export default function HomePage() {
       {/* Hero Section */}
       <section className="relative pt-24 pb-16 px-4">
         {/* Gradient Background */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none h-screen">
+        <div className="fixed inset-0 overflow-hidden pointer-events-none h-screen">
           <div className="absolute -top-1/4 -right-1/4 w-1/2 h-1/2 bg-purple-500/20 rounded-full blur-[120px]" />
           <div className="absolute -bottom-1/4 -left-1/4 w-1/2 h-1/2 bg-blue-500/20 rounded-full blur-[120px]" />
         </div>
@@ -45,17 +45,6 @@ export default function HomePage() {
               <button onClick={() => router.push("/login")} className="px-6 py-3 rounded-xl bg-gradient-to-r from-purple-500 to-blue-500 text-white text-sm font-medium hover:opacity-90 transition-opacity">
                 Create Your Linksy Profile
               </button>
-            </div>
-
-            <div className="pt-8 flex items-center justify-center space-x-8 text-sm text-white/50">
-              <div className="flex items-center space-x-2">
-                <Shield className="h-4 w-4 text-purple-400" />
-                <span>SSL Secured</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <BarChart className="h-4 w-4 text-purple-400" />
-                <span>Analytics Included</span>
-              </div>
             </div>
           </div>
         </div>
